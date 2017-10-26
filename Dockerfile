@@ -1,4 +1,4 @@
-FROM ruby:latest
+FROM ruby:alpine
 
 RUN mkdir /usr/src/app
 WORKDIR /usr/src/app

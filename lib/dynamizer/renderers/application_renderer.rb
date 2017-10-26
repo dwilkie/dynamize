@@ -1,8 +1,9 @@
 require "erb"
 require_relative "../data_wrappers/document_data"
 
-class Dynamizer::ApplicationRenderer
+class Dynamizer::Renderer
   DEFAULT_TEMPLATE_EXTENSION = "erb"
+  DEFAULT_OUTPUT_PATH = "/tmp"
   attr_accessor :content, :document_data
 
   def self.descendants
@@ -37,16 +38,25 @@ class Dynamizer::ApplicationRenderer
     @document_data ||= Dynamizer::DocumentData.new
   end
 
-  def self.template_extension
-    DEFAULT_TEMPLATE_EXTENSION
+  def self.template_name
+    underscore(self.name)
   end
 
-  def self.template_name
-    self::TEMPLATE_NAME
+  # https://stackoverflow.com/a/1509957
+  def self.underscore(camel_cased_word)
+    camel_cased_word.to_s.gsub(/::/, '/').gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').gsub(/([a-z\d])([A-Z])/,'\1_\2').tr("-", "_").downcase
   end
 
   def self.output_path
-    File.expand_path("../../../docs/#{template_name}", File.dirname(__FILE__))
+    File.join(output_dir, template_name)
+  end
+
+  def self.template_extension
+    ENV["DYNAMIZER_TEMPLATE_EXTENSION"] || DEFAULT_TEMPLATE_EXTENSION
+  end
+
+  def self.output_dir
+    ENV["DYNAMIZER_OUTPUT_DIR"] || DEFAULT_OUTPUT_PATH
   end
 
   def self.template_path

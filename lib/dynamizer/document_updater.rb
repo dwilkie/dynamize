@@ -15,6 +15,6 @@ class Dynamizer::DocumentUpdater
   end
 
   def renderers_to_execute
-    Dynamizer::ApplicationRenderer.descendants.select { |renderer_class| renderer_class.render? }
+    Dynamizer::Renderer.descendants.select { |renderer_class| renderer_class.render? }
   end
 end
