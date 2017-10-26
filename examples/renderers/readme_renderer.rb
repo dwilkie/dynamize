@@ -6,6 +6,6 @@ class ReadmeRenderer < Dynamizer::Renderer
   end
 
   def last_updated_on
-    Date.today.to_time.strftime("%d %B %Y")
+    data.last_updated_on.to_time.strftime("%d %B %Y")
   end
 end

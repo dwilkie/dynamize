@@ -40,7 +40,7 @@ class Dynamizer::Renderer
   end
 
   def self.template_path
-    File.join(templates_dir, template_name)
+    File.join(templates_dir, [template_name, template_extension].join("."))
   end
 
   def self.template_extension
