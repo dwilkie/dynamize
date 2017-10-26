@@ -1,2 +1,0 @@
-class Dynamizer::DocumentData
-end

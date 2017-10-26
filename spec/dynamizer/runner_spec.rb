@@ -3,6 +3,7 @@ require 'dynamizer/runner'
 
 RSpec.describe Dynamizer::Runner do
   describe "#dynamize!", :fakefs do
+    require 'dynamizer/renderer'
     class MyRenderer < Dynamizer::Renderer
       require 'date'
 

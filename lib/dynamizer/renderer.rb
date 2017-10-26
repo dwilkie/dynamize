@@ -1,41 +1,29 @@
 require "erb"
-require_relative "../data_wrappers/document_data"
 
 class Dynamizer::Renderer
   DEFAULT_TEMPLATE_EXTENSION = "erb"
-  DEFAULT_OUTPUT_DIR = "/tmp/output"
-  attr_accessor :content, :document_data
+  DEFAULT_TEMPLATES_DIR = "/tmp/dynamizer_templates"
+  DEFAULT_OUTPUT_DIR = "/tmp/dynamizer_output"
 
-  def self.descendants
-    ObjectSpace.each_object(Class).select { |klass| klass < self }
-  end
+  attr_accessor :data
 
   def initialize(options = {})
-    self.content = options[:content]
-    self.document_data = options[:document_data]
+    self.data = options[:data]
   end
 
   def render
     ERB.new(template).result(binding)
   end
 
-  def generate_doc!
+  def generate_output!
     FileUtils.mkdir_p(File.dirname(self.class.output_path))
     File.open(self.class.output_path, 'w') { |file| file.write(render) }
-  end
-
-  def content
-    @content ||= {}
   end
 
   private
 
   def template
     @template ||= File.read(self.class.template_path)
-  end
-
-  def document_data
-    @document_data ||= Dynamizer::DocumentData.new
   end
 
   def self.template_name
@@ -51,6 +39,10 @@ class Dynamizer::Renderer
     File.join(output_dir, template_name)
   end
 
+  def self.template_path
+    File.join(templates_dir, template_name)
+  end
+
   def self.template_extension
     ENV["DYNAMIZER_TEMPLATE_EXTENSION"] || DEFAULT_TEMPLATE_EXTENSION
   end
@@ -59,8 +51,8 @@ class Dynamizer::Renderer
     ENV["DYNAMIZER_OUTPUT_DIR"] || DEFAULT_OUTPUT_DIR
   end
 
-  def self.template_path
-    File.expand_path("../templates/#{template_name}.#{template_extension}", File.dirname(__FILE__))
+  def self.templates_dir
+    ENV["DYNAMIZER_TEMPLATES_DIR"] || DEFAULT_TEMPLATES_DIR
   end
 
   def self.render?

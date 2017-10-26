@@ -16,6 +16,10 @@ Make your static site dynamic. Works well with [Github Pages](https://pages.gith
 $ docker run dwilkie/dynamizer /bin/sh -c "bundle exec rake -T"
 ```
 
+```
+$ sudo docker run --rm -v $(pwd)/examples/templates:/tmp/dynamizer_templates:ro -v $(pwd)/examples/renderers:/tmp/dynamizer_renderers:ro -t dynamizer /bin/sh -c "bundle exec rake dynamizer:dynamize && ls /tmp"
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/dwilkie/dynamizer.
