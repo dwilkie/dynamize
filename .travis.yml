@@ -10,6 +10,10 @@ before_install:
 script:
   - bash -c 'if [[ "${DOCKER}" == "1" ]]; then sudo docker run --rm dwilkie/dynamize:spec /bin/sh -c "bundle exec rake"; else bundle exec rake; fi'
 after_success:
-  - bash -c 'if [[ "${DOCKER}" == "1" ]]; then sudo docker run --rm dwilkie/dynamize /bin/sh -c "bundle exec rake dynamizer:dynamize"; fi'
-  - git add -A
+  - git clone 'https://github.com/$TRAVIS_REPO_SLUG.git' out
+  - cd out
+  - git config user.email "deploy@travis-ci.org"
+  - git config user.name "Deployment Bot (from Travis CI)"
+  - bash -c 'if [[ "${DOCKER}" == "1" ]]; then sudo docker run --rm -v $(pwd)/examples/templates:/tmp/dynamizer_templates:ro -v $(pwd)/examples/renderers:/tmp/dynamizer_renderers:ro -v $(pwd)/examples/data:/tmp/dynamizer_data:ro -v $(pwd):/tmp/dynamizer_output dwilkie/dynamize dwilkie/dynamize /bin/sh -c "bundle exec rake dynamizer:dynamize"; fi'
+  - git add .
   - git status
