@@ -2,7 +2,7 @@ Dir[File.expand_path("renderers/**/*.rb", File.dirname(__FILE__))].each { |f| re
 require_relative "data_wrappers/document_data"
 
 class Dynamizer::DocumentUpdater
-  def update_all!
+  def dynamize!
     renderers_to_execute.each do |renderer_class|
       renderer_class.new(:document_data => document_data).generate_doc!
     end

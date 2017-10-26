@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'dynamizer/document_updater'
 
 RSpec.describe Dynamizer::DocumentUpdater do
-  describe "#update_all!", :fakefs do
+  describe "#dynamize!", :fakefs do
     class MyRenderer < Dynamizer::Renderer
       require 'date'
 
@@ -20,13 +20,13 @@ RSpec.describe Dynamizer::DocumentUpdater do
     end
 
     def setup_scenario
-      subject.update_all!
+      subject.dynamize!
     end
 
-    def assert_update_all!
-      expect(File.read("/tmp/my_renderer")).to eq(Date.today.to_s)
+    def assert_dynamize!
+      expect(File.read("#{Dynamizer::Renderer::DEFAULT_OUTPUT_DIR}/my_renderer")).to eq(Date.today.to_s)
     end
 
-    it { assert_update_all! }
+    it { assert_dynamize! }
   end
 end

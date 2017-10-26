@@ -3,7 +3,7 @@ require_relative "../data_wrappers/document_data"
 
 class Dynamizer::Renderer
   DEFAULT_TEMPLATE_EXTENSION = "erb"
-  DEFAULT_OUTPUT_PATH = "/tmp"
+  DEFAULT_OUTPUT_DIR = "/tmp/output"
   attr_accessor :content, :document_data
 
   def self.descendants
@@ -56,7 +56,7 @@ class Dynamizer::Renderer
   end
 
   def self.output_dir
-    ENV["DYNAMIZER_OUTPUT_DIR"] || DEFAULT_OUTPUT_PATH
+    ENV["DYNAMIZER_OUTPUT_DIR"] || DEFAULT_OUTPUT_DIR
   end
 
   def self.template_path
