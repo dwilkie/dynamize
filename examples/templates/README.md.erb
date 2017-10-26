@@ -20,7 +20,7 @@ Dynamizer takes the files in the [templates directory](https://github.com/dwilki
 See the [examples](https://github.com/dwilkie/dynamizer/tree/master/examples) for more info.
 
 ```
-$ docker run --rm -v $(pwd)/examples/templates:/tmp/dynamizer_templates:ro -v $(pwd)/examples/renderers:/tmp/dynamizer_renderers:ro -v $(pwd)/examples/data:/tmp/dynamizer_data:ro -v $(pwd):/tmp/dynamizer_output dwilkie/dynamizer /bin/sh -c "bundle exec rake dynamizer:dynamize"
+$ docker run --rm -v $(pwd)/examples/templates:/tmp/dynamizer_templates:ro -v $(pwd)/examples/renderers:/tmp/dynamizer_renderers:ro -v $(pwd)/examples/data:/tmp/dynamizer_data:ro -v $(pwd):/tmp/dynamizer_output dwilkie/dynamize /bin/sh -c "bundle exec rake dynamizer:dynamize"
 ```
 
 ## Contributing
