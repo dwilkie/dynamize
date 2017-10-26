@@ -9,7 +9,7 @@ Make your static site dynamic. Works well with [Github Pages](https://pages.gith
 ## Features
 
 * Uses [ERB](http://ruby-doc.org/stdlib/libdoc/erb/rdoc/ERB.html) to dynamize your static content
-* Includes a sample `.travis.yml` file for updating content using [Travis Cron Jobs](https://docs.travis-ci.com/user/cron-jobs/).
+* Includes a sample [.travis.yml](https://github.com/dwilkie/dynamizer/blob/master/.travis.yml) configuration file for updating content from a Travis build which can be triggered from a [Cron Job](https://docs.travis-ci.com/user/cron-jobs/).
 
 ## Usage
 
@@ -22,6 +22,10 @@ See the [examples](https://github.com/dwilkie/dynamizer/tree/master/examples) fo
 ```
 $ docker run --rm -v $(pwd)/examples/templates:/tmp/dynamizer_templates:ro -v $(pwd)/examples/renderers:/tmp/dynamizer_renderers:ro -v $(pwd)/examples/data:/tmp/dynamizer_data:ro -v $(pwd):/tmp/dynamizer_output dwilkie/dynamize /bin/sh -c "bundle exec rake dynamizer:dynamize"
 ```
+
+## Deployment
+
+From (this article)[https://gist.github.com/domenic/ec8b0fc8ab45f39403dd] create new ssh keypair and add the public key to the deploy keys for your repo. Encrypt the private key [with Travis](https://docs.travis-ci.com/user/encrypting-files/) and add it to the repo. See the [.travis.yml](https://github.com/dwilkie/dynamizer/blob/master/.travis.yml) configuration file for an example of how to deploy dynamic content to Github.
 
 ## Contributing
 
