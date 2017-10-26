@@ -12,3 +12,4 @@
 
 # bundled gems
 /vendor/ruby
+/vendor/bundle
