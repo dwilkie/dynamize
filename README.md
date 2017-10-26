@@ -1,5 +1,7 @@
 # Dynamizer
 
+[![Build Status](https://travis-ci.org/dwilkie/dynamize.svg?branch=master)](https://travis-ci.org/dwilkie/dynamize)
+
 Make your static site dynamic. Works well with [Github Pages](https://pages.github.com/) and [Travis](https://travis-ci.org/).
 
 ## Features
