@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'dynamizer/document_updater'
+require 'dynamizer/runner'
 
-RSpec.describe Dynamizer::DocumentUpdater do
+RSpec.describe Dynamizer::Runner do
   describe "#dynamize!", :fakefs do
     class MyRenderer < Dynamizer::Renderer
       require 'date'
