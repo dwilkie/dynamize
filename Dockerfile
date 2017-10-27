@@ -1,5 +1,9 @@
 FROM ruby:alpine
 
+RUN apk --update add git openssh && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm /var/cache/apk/*
+
 RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 

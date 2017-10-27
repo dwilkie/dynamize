@@ -20,3 +20,4 @@ vendor/ruby
 
 .bundle
 .ruby-version
+examples
