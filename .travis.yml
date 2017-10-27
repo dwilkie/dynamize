@@ -1,7 +1,6 @@
 language: ruby
 sudo: required
-services:
-  - docker
+dist: trusty
 env:
   - DOCKER=0
   - DOCKER=1
